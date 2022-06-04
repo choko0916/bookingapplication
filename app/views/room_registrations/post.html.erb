@@ -1,0 +1,28 @@
+<div class="booking_container">
+  <h3><%= current_user.name %>さん のルーム登録情報一覧</h3>
+
+  <div class="booking_table">
+    <table class="table table-bordered table-striped">
+      <thead>
+        <tr>
+          <th>ルーム画像</th>
+          <th>ルーム名</th>
+          <th>ルーム紹介</th>
+          <th>金額</th>
+          <th>登録日時</th>
+        </tr>
+      </thead>
+      <% @room_registrations.each do |room_registration| %>
+      <tbody>
+        <tr>
+          <td><%= image_tag room_registration.room_image.thumb300.url %></td>
+          <td><%= room_registration.room_name %></td>
+          <td><%= room_registration.room_introduction %></td>
+          <td><%= room_registration.room_price %></td>
+          <td><%= room_registration.created_at %></td>
+        </tr>
+      </tbody>
+      <% end %>
+    </table>
+  </div>
+</div>

@@ -1,16 +1,76 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>BookingApplication</title>
+    <title>BookingApp</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
-  </head>
+    <%= javascript_pack_tag 'application' %>
 
+  </head>
   <body>
+    <header>
+      <div class="header_container">
+        <div class="header_left">
+          <%= link_to home_index_path, class: 'header_logo' do %>
+            <%= image_tag 'logo.png' %>
+          <% end %>
+          <div class="search"><%= render "shared/search" %></div>
+          <div class="search_free_word"><%= render "shared/search_free_word" %></div>
+        </div>
+
+        <% if user_signed_in? %>  <!-- ユーザーがログインしているか調べる(diviseをアプリに導入すると使えるようになるメソッド)-->
+          <div class="header_right">
+            <!-- bootstrap4を使用してドロップダウンメニュー作成 -->
+            <div class="dropdown">
+              <!-- 切替ボタンの設定 -->
+              <div id="btnOpenMenu" class="dropdown-toggle"  
+              data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <% if current_user.avatar? %>
+                  <%= image_tag current_user.avatar.thumb50.url %>
+                <% else %>
+                  <%= image_tag "/assets/default.jpg", size: "50x50" %>
+                <% end %>
+              </div>
+              <!-- ドロップメニューの設定 -->
+              <div class="dropdown-menu" area-labelledby="btnOpenMenu">
+                <%= link_to "ルーム登録", new_room_registration_path, class: "dropdown-item" %>
+                <%= link_to "予約済みルーム一覧", room_booking_path(current_user.id), class: "dropdown-item" %>
+                <%= link_to "登録済みルーム一覧", room_registrations_post_path, class: "dropdown-item" %>
+                <%= link_to "設定", edit_user_path(current_user.id), class: "dropdown-item" %>
+                <%= link_to "ログアウト", destroy_user_session_path, method: :delete, class: "dropdown-item" %>
+              </div>
+            </div>
+            <div class="right user_name"><%= current_user.name %></div>
+        <% else %>
+          <div class="header_right">
+            <div class="right signed_in_message">
+              <p>現在ログインしていません</p>
+            </div>
+            <div class="header_button">
+              <button class="sign_in"><%= link_to "ログイン", new_user_session_path %></button>
+              <button class="sign_up"><%= link_to "登録する", new_user_registration_path %></button>
+              <button class="sign_out"><%= link_to "ログアウト", destroy_user_session_path, method: :delete %></button>
+            </div>
+            <%= image_tag "/assets/default.jpg", size: "50x50" %>
+          </div>
+        <% end %>
+      </div>
+    </header>
+    <% if notice or alert %>
+      <div class="flash">
+        <p class="notice"><%= notice %></p>
+        <p class="alert"><%= alert %></p>
+      </div>
+    <% end %>
     <%= yield %>
-  </body>
+    <footer>
+      <p>© 2022 POTEPAN.INC.</p>
+    </footer>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+  </body>  
 </html>

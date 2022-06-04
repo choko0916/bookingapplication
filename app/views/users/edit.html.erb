@@ -1,0 +1,37 @@
+<div class="user_container">
+  <div class="user_input_area">
+    <h3>プロフィール</h3>
+
+    <%= form_with model: @user do |f| %>
+
+    <p><%= f.hidden_field :id, value: current_user.id %></p> <!-- f.hidden_field そのインスタンスの属性、渡したい値は何か -->
+
+    <% if current_user.avatar? %>
+      <%= image_tag @user.avatar.thumb100.url %>
+    <% else %>
+      <%= image_tag "/assets/default.jpg", size: "100x100" %>
+    <% end %>
+
+    <div class="user_input_field">
+      <div><%= f.label :avatar, "アイコン画像" %></div>
+      <div><%= f.file_field :avatar, class: "avatar" %></div>
+    </div>
+
+
+    <div class="user_input_field">
+      <div><%= f.label :name, "名前" %></div>
+      <div><%= f.text_field :name, class: "name" %></div>
+    </div>
+
+    <div class="user_input_field">
+      <div><%= f.label :introduction, "自己紹介" %></div>
+      <div><%= f.text_area :introduction, class: "introduction" %></div>
+    </div>
+
+    <div class="user_input_field">
+      <div><%= f.submit "更新", class: "submit" %></div>
+    </div>
+
+    <% end %>
+  </div>
+</div>

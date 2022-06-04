@@ -1,0 +1,32 @@
+
+<% if flash[:notice] %>
+  <%= flash[:notice] %>
+<% end %>
+
+<h3>検索結果</h3>
+<div class="booking_table">
+  <table class="table table-bordered table-striped">
+    <thead>
+      <tr>
+        <th>ルーム画像</th>
+        <th>ルーム名</th>
+        <th>所在地</th>
+        <th>紹介</th>
+        <th>金額</th>
+        <th>予約</th>
+      </tr>
+    </thead>
+    <tbody>
+    <% @room_registrations.each do |room_registration| %>
+      <tr="rooms">
+        <td><%= image_tag room_registration.room_image.thumb300.url %></td>>
+        <td><%= room_registration.room_name %></td>>
+        <td><%= room_registration.room_address %></td>>
+        <td><%= room_registration.room_introduction %></td>>
+        <td>￥<%= room_registration.room_price %></td>>
+        <td><%= link_to "予約へ", room_registration %></td>>
+        </tr>
+    <% end %>
+    </tbody>
+  </table>
+</div>
