@@ -1,4 +1,7 @@
 class RoomRegistrationsController < ApplicationController
+  
+  before_action :authenticate_user!
+  
   def index
     @room_registrations = RoomRegistration.all
   end

@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
-
+  
   def edit
-    @user = User.find(params[:id])
+    @user = current_user
   end
 
   def update
@@ -20,4 +20,5 @@ class UsersController < ApplicationController
   def user_params
     params.require(:user).permit(:avatar, :name, :introduction).merge(id: current_user.id)
   end
+
 end

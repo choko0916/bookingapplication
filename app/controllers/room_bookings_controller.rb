@@ -1,4 +1,5 @@
 class RoomBookingsController < ApplicationController
+  
   def index
     @room_bookings = RoomBooking.all
     @user = current_user
