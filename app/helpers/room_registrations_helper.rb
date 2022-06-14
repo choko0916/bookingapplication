@@ -1,0 +1,2 @@
+module RoomRegistrationsHelper
+end

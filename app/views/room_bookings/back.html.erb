@@ -1,0 +1,26 @@
+<div class="booking_container">
+  <h3>予約ページ</h3>
+
+  <%= form_with model: @room_booking do |f| %>
+
+  <p><%= f.hidden_field :room_registration_id, value: @room_registration.id %></p>
+
+    <div class="booking">
+      <%= f.label :start_date, "開始日", class:"bold" %><br>
+      <%= f.date_field :start_date, class:"input_field" %>
+    </div> 
+    <div class="booking">
+      <%= f.label :end_date, "終了日", class:"bold" %><br>
+      <%= f.date_field :end_date, class:"input_field" %>
+    </div>
+    <div class="booking">
+      <%= f.label :number_of_people, "人数", class:"bold" %><br>
+      <%= f.number_field :number_of_people, class:"input_field", placeholder: "宿泊人数を入力"  %>
+    </div>
+    <div class="booking">
+      <div class="submit"><%= f.submit "予約する" %></div>
+      <div class="room_bookings_path"><%= link_to "宿泊施設一覧に戻る", room_bookings_path %></div>
+    </div>
+  <% end %>
+
+</div>

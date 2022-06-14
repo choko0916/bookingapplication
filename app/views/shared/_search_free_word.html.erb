@@ -1,0 +1,7 @@
+<!--#AjaxがデフォルトでOnになっているため、local: trueのオプションも忘れないように ?? 調べる -->
+<div class="search_free_word_area">
+  <%= form_with url: room_registrations_search_free_word_path, method: :get, local: true do |f| %>
+    <%= f.text_field :free_word, placeholder: "キーワード" %>
+    <%= f.submit "検索" %>
+  <% end %>
+</div>

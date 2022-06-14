@@ -1,0 +1,26 @@
+<div class="booking_container">
+  <h3>予約ページ</h3>
+ 
+  <%= form_with model: @room_booking, url: room_bookings_confirm_path do |f| %>
+
+    <p><%= f.hidden_field :room_registration_id, value: @room_registration.id %></p>
+    <p><%= f.hidden_field :user_id, value: current_user.id %></p>
+    <div class="booking">
+      <%= f.label :start_date, "開始日", class:"bold" %><br>
+      <%= f.date_field :start_date, class:"input_field" %>
+    </div> 
+    <div class="booking">
+      <%= f.label :end_date, "終了日", class:"bold" %><br>
+      <%= f.date_field :end_date, class:"input_field" %>
+    </div>
+    <div class="booking">
+      <%= f.label :number_of_people, "人数", class:"bold" %><br>
+      <%= f.number_field :number_of_people, class:"input_field", placeholder: "宿泊人数を入力"  %>
+    </div>
+    <div class="booking">
+      <div><%= f.submit "確認画面へ", class: "submit" %></div>
+      <button type="button", class="btn btn-success"><%= link_to "ルーム情報一覧へ", room_registrations_path %></button>
+    </div>
+  <% end %>
+
+</div>

@@ -1,0 +1,36 @@
+<% if notice or alert %>
+    <div class="flash">
+      <p class="notice"><%= notice %></p>
+      <p class="alert"><%= alert %></p>
+    </div>
+<% end %>
+
+<div class="booking_container">   
+  <h3>予約確定画面</h3>
+
+  <div class="booking">
+    <p>開始日</p>
+    <p><%= @room_booking.start_date %></p>
+  </div>
+  <div class="booking">
+    <p>終了日</p>
+    <p><%= @room_booking.end_date %></p>
+  </div>
+  <div class="booking">
+    <p>滞在日数</p>
+    <p><%= @booking_days %>泊<%= @booking_days + 1 %>日</p>
+  </div>
+  <div class="booking">
+    <p>人数</p>
+    <p><%= @room_booking.number_of_people %>人</p>
+  </div>
+  <div class="booking">
+    <p>お支払い金額</p>
+    <p><%= @room_booking.room_registration.room_price %>円/泊 × <%= @room_booking.number_of_people %>人 × <%= @booking_days %>泊</p>
+    <p>¥<%= @room_booking.room_registration.room_price * @room_booking.number_of_people * @booking_days %></p>
+  </div>
+  <div class="booking">
+    <p><%= link_to "トップへ戻る", home_index_path %></p>
+  </div>
+</div>
+  
